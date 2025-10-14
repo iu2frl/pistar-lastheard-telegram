@@ -200,7 +200,7 @@ class MMDVMLogLine:
         
         message += f" ({'RF' if not self.is_network else 'Network'})"
         message += f"\n🎯 <b>Dest:</b> {self.destination}"
-        message += f"\n⏱️ <b>Duration:</b> {self.duration}s"
+        message += f"\n⏰ <b>Duration:</b> {self.duration}s"
         message += f"\n📈 <b>Packet Loss:</b> {self.packet_loss}%"
         message += f"\n📊 <b>BER:</b> {self.ber}%"
         
