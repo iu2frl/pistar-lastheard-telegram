@@ -148,7 +148,7 @@ class MMDVMLogLine:
         
         match = re.match(ysf_network_data_pattern, logline)
         if match:
-            self.mode = "YSF"
+            self.mode = "YSF-D"
             self.timestamp = datetime.strptime(match.group("timestamp"), "%Y-%m-%d %H:%M:%S.%f")
             self.is_network = True  # Always network for this type
             self.callsign = match.group("callsign").strip()
@@ -182,6 +182,8 @@ class MMDVMLogLine:
             mode_icon = "⭐"
         elif self.mode == "YSF":
             mode_icon = "📡"
+        elif self.mode == "YSF-D":
+            mode_icon = "📟"
         else:
             mode_icon = "📶"
         

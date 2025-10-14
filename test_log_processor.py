@@ -237,7 +237,7 @@ if __name__ == "__main__":
             print(f"   Processing it now...\n")
             process_log_file(default_log)
         else:
-            print("❌ No log file specified and MMDVM-2025-10-13.log not found.")
+            print("❌ No log file specified and MMDVM-2025-10-14.log not found.")
             print()
             sys.exit(1)
     else:
