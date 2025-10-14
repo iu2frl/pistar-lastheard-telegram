@@ -214,11 +214,11 @@ class MMDVMLogLine:
             elif self.destination.endswith("L"):
                 message += f"\n\n🔗 <b>Action:</b> Link to {self.destination[:-1]}"
             elif self.destination.endswith("U"):
-                message += f"\n\n❌ <b>Action:</b> Unlink reflector"
+                message += "\n\n❌ <b>Action:</b> Unlink reflector"
             elif self.destination.endswith("I"):
-                message += f"\n\nℹ️ <b>Action:</b> Get repeater info"
+                message += "\n\nℹ️ <b>Action:</b> Get repeater info"
             elif self.destination.endswith("E"):
-                message += f"\n\n🔄 <b>Action:</b> Echo test"
+                message += "\n\n🔄 <b>Action:</b> Echo test"
         
         return message
 
