@@ -57,8 +57,11 @@ class MMDVMLogLine:
         dmr_pattern = (
             r"^M: (?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+) "
             r"DMR Slot (?P<slot>\d), received (?P<source>network|RF) (?:late entry|voice header|end of voice transmission) "
-            r"from (?P<callsign>[\w\d]+) to TG (?P<tg>\d+)"
-            r"(?:, (?P<duration>[\d\.]+) seconds, (?P<packet_loss>[\d\.]+)% packet loss, BER: (?P<ber>[\d\.]+)%)?"
+            r"from (?P<callsign>[\w\d]+) to(?: TG)? (?P<tg>\d+)"
+            r"(?:, (?P<duration>[\d\.]+) seconds"
+            r"(?:, (?P<packet_loss>[\d\.]+)% packet loss)?"
+            r", BER: (?P<ber>[\d\.]+)%"
+            r"(?:, RSSI: (?P<rssi>[\-\d/]+) dBm)?)?"
         )
         
         # Check if it's a D-Star line (with "from...to")
@@ -81,7 +84,10 @@ class MMDVMLogLine:
             r"^M: (?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+) "
             r"YSF, received (?P<source>network|RF) end of transmission "
             r"from (?P<callsign>[\w\d\-/]+)\s+to DG-ID (?P<dgid>\d+)"
-            r", (?P<duration>[\d\.]+) seconds, (?P<packet_loss>[\d\.]+)% packet loss, BER: (?P<ber>[\d\.]+)%"
+            r", (?P<duration>[\d\.]+) seconds"
+            r"(?:, (?P<packet_loss>[\d\.]+)% packet loss)?"
+            r", BER: (?P<ber>[\d\.]+)%"
+            r"(?:, RSSI: (?P<rssi>[\-\d/]+) dBm)?"
         )
         
         # Check if it's a YSF network data line (without statistics)
@@ -141,7 +147,7 @@ class MMDVMLogLine:
             self.callsign = match.group("callsign").strip()
             self.destination = f"DG-ID {match.group('dgid')}"
             self.duration = match.group("duration")
-            self.packet_loss = match.group("packet_loss")
+            self.packet_loss = match.group("packet_loss") if match.group("packet_loss") else "N/A"
             self.ber = match.group("ber")
             self.qrz_url = f"https://www.qrz.com/db/{self.callsign.split('-')[0].strip()}"
             return

@@ -231,7 +231,7 @@ if __name__ == "__main__":
         print()
         
         # If MMDVM-2025-10-13.log exists in current directory, use it as default
-        default_log = "MMDVM-2025-10-14.log"
+        default_log = "MMDVM-2025-10-15.log"
         if os.path.exists(default_log):
             print(f"ℹ️  Found log file: {default_log}")
             print(f"   Processing it now...\n")
